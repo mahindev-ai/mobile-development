@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -146,7 +147,7 @@ class MainApp extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 180,
                     child: Stack(
@@ -302,6 +303,7 @@ class MainApp extends StatelessWidget {
                                           color: Colors.transparent),
                                       child: const InkWell(
                                         child: FaIcon(
+                                          // ignore: deprecated_member_use
                                           FontAwesomeIcons.cut,
                                           color: Colors.white,
                                           size: 30,
@@ -333,37 +335,34 @@ class MainApp extends StatelessWidget {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFCA6C36),
-                                    borderRadius: BorderRadius.circular(50),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 30,
-                                    borderWidth: 1,
-                                    buttonSize: 60,
-                                    icon: const FaIcon(
-                                      FontAwesomeIcons.brush,
-                                      color: Colors.white,
-                                      size: 30,
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFCA6C36),
+                                      borderRadius: BorderRadius.circular(50),
+                                      shape: BoxShape.rectangle,
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                ),
-                                Text(
-                                  'Shaving',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Roboto',
-                                        color: Colors.white,
-                                        fontSize: 16,
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Ink(
+                                        decoration: const BoxDecoration(
+                                            color: Colors.transparent),
+                                        child: const InkWell(
+                                          child: FaIcon(
+                                            FontAwesomeIcons.brush,
+                                            color: Colors.white,
+                                            size: 30,
+                                          ),
+                                        ),
                                       ),
+                                    )),
+                                const Text(
+                                  'Shaving',
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ],
                             ),
@@ -382,37 +381,33 @@ class MainApp extends StatelessWidget {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFCA6C36),
-                                    borderRadius: BorderRadius.circular(50),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 30,
-                                    borderWidth: 1,
-                                    buttonSize: 60,
-                                    icon: const FaIcon(
-                                      FontAwesomeIcons.airFreshener,
-                                      color: Colors.white,
-                                      size: 30,
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFCA6C36),
+                                      borderRadius: BorderRadius.circular(50),
+                                      shape: BoxShape.rectangle,
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                ),
-                                Text(
-                                  'Creambath',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Roboto',
-                                        color: Colors.white,
-                                        fontSize: 16,
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Ink(
+                                        decoration: const BoxDecoration(
+                                            color: Colors.transparent),
+                                        child: const FaIcon(
+                                          // ignore: deprecated_member_use
+                                          FontAwesomeIcons.airFreshener,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ),
                                       ),
+                                    )),
+                                const Text(
+                                  'Creambath',
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ],
                             ),
@@ -464,15 +459,9 @@ class MainApp extends StatelessWidget {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(
+                              Navigator.pushNamed(
+                                context,
                                 'AvailableBarberPage',
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: const Duration(milliseconds: 1),
-                                  ),
-                                },
                               );
                             },
                             child: Text(
@@ -522,30 +511,25 @@ class MainApp extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'Edwin',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              RatingBar.builder(
-                                onRatingUpdate: (newValue) => setState(
-                                    () => _model.ratingBarValue1 = newValue),
-                                itemBuilder: (context, index) => Icon(
+                              RatingBarIndicator(
+                                itemBuilder: (context, index) => const Icon(
                                   Icons.star_rounded,
-                                  color: FlutterFlowTheme.of(context).warning,
+                                  color: Color.fromRGBO(252, 220, 12, 1),
                                 ),
                                 direction: Axis.horizontal,
-                                initialRating: _model.ratingBarValue1 ??= 4,
+                                rating: 4,
                                 unratedColor:
-                                    FlutterFlowTheme.of(context).accent2,
+                                    const Color.fromRGBO(117, 117, 117, 1),
                                 itemCount: 5,
                                 itemSize: 16,
-                                glowColor: FlutterFlowTheme.of(context).warning,
                               ),
                             ],
                           ),
@@ -579,30 +563,25 @@ class MainApp extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'Alex',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              RatingBar.builder(
-                                onRatingUpdate: (newValue) => setState(
-                                    () => _model.ratingBarValue2 = newValue),
-                                itemBuilder: (context, index) => Icon(
+                              RatingBarIndicator(
+                                itemBuilder: (context, index) => const Icon(
                                   Icons.star_rounded,
-                                  color: FlutterFlowTheme.of(context).warning,
+                                  color: Color.fromRGBO(252, 220, 12, 1),
                                 ),
                                 direction: Axis.horizontal,
-                                initialRating: _model.ratingBarValue2 ??= 3,
+                                rating: 3,
                                 unratedColor:
-                                    FlutterFlowTheme.of(context).accent2,
+                                    const Color.fromRGBO(117, 117, 117, 1),
                                 itemCount: 5,
                                 itemSize: 16,
-                                glowColor: FlutterFlowTheme.of(context).warning,
                               ),
                             ],
                           ),
@@ -636,30 +615,25 @@ class MainApp extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'Cindy',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              RatingBar.builder(
-                                onRatingUpdate: (newValue) => setState(
-                                    () => _model.ratingBarValue3 = newValue),
-                                itemBuilder: (context, index) => Icon(
+                              RatingBarIndicator(
+                                itemBuilder: (context, index) => const Icon(
                                   Icons.star_rounded,
-                                  color: FlutterFlowTheme.of(context).warning,
+                                  color: Color.fromRGBO(252, 220, 12, 1),
                                 ),
                                 direction: Axis.horizontal,
-                                initialRating: _model.ratingBarValue3 ??= 3,
+                                rating: 3,
                                 unratedColor:
-                                    FlutterFlowTheme.of(context).accent2,
+                                    const Color.fromRGBO(117, 117, 117, 1),
                                 itemCount: 5,
                                 itemSize: 16,
-                                glowColor: FlutterFlowTheme.of(context).warning,
                               ),
                             ],
                           ),

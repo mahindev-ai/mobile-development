@@ -33,6 +33,7 @@ dependencies:
   table_calendar: 3.0.6
   timeago: 3.2.2
   url_launcher: 6.1.10
+  
 
 dev_dependencies:
   flutter_test:
